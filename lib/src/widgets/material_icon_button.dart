@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 
 class MaterialIconButton extends StatelessWidget {
   const MaterialIconButton({
-    Key? key,
+    Key key,
     this.color,
-    required this.child,
+    @required this.child,
     this.radius = 12,
-    required this.toolTipMesg,
+    @required this.toolTipMesg,
     this.onPressed,
     this.onHover,
     this.onTapDown,
   }) : super(key: key);
 
-  final Color? color;
+  final Color color;
   final Widget child;
   final double radius;
   final String toolTipMesg;
-  final void Function()? onPressed;
-  final void Function(bool)? onHover;
-  final void Function(TapDownDetails details)? onTapDown;
+  final void Function() onPressed;
+  final void Function(bool) onHover;
+  final void Function(TapDownDetails details) onTapDown;
   @override
   Widget build(BuildContext context) {
     return Material(

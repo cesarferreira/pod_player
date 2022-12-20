@@ -3,15 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class PlayVideoFromNetworkQualityUrls extends StatefulWidget {
-  const PlayVideoFromNetworkQualityUrls({Key? key}) : super(key: key);
+  const PlayVideoFromNetworkQualityUrls({Key key}) : super(key: key);
 
   @override
-  State<PlayVideoFromNetworkQualityUrls> createState() =>
-      _PlayVideoFromAssetState();
+  State<PlayVideoFromNetworkQualityUrls> createState() => _PlayVideoFromAssetState();
 }
 
 class _PlayVideoFromAssetState extends State<PlayVideoFromNetworkQualityUrls> {
-  late final PodPlayerController controller;
+  PodPlayerController controller;
   @override
   void initState() {
     controller = PodPlayerController(
@@ -19,13 +18,11 @@ class _PlayVideoFromAssetState extends State<PlayVideoFromNetworkQualityUrls> {
         videoUrls: [
           VideoQalityUrls(
             quality: 360,
-            url:
-                'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+            url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
           ),
           VideoQalityUrls(
             quality: 720,
-            url:
-                'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+            url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
           ),
         ],
       ),

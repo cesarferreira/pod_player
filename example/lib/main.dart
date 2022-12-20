@@ -15,7 +15,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +27,7 @@ class MyApp extends StatelessWidget {
         '/fromYoutube': (context) => const PlayVideoFromYoutube(),
         '/fromAsset': (context) => const PlayVideoFromAsset(),
         '/fromNetwork': (context) => const PlayVideoFromNetwork(),
-        '/fromNetworkQualityUrls': (context) =>
-            const PlayVideoFromNetworkQualityUrls(),
+        '/fromNetworkQualityUrls': (context) => const PlayVideoFromNetworkQualityUrls(),
         '/customVideo': (context) => const CustomVideoControlls(),
       },
       home: const MainPage(),
@@ -37,7 +36,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  const MainPage({Key key}) : super(key: key);
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -62,8 +61,7 @@ class _MainPageState extends State<MainPage> {
             ),
             _button(
               'Play video from Network quality urls',
-              onPressed: () =>
-                  Navigator.of(context).pushNamed('/fromNetworkQualityUrls'),
+              onPressed: () => Navigator.of(context).pushNamed('/fromNetworkQualityUrls'),
             ),
             _button(
               'Play video from Asset (with custom labels)',
@@ -75,8 +73,7 @@ class _MainPageState extends State<MainPage> {
             ),
             _button(
               'Play private video from Vimeo',
-              onPressed: () =>
-                  Navigator.of(context).pushNamed('/fromVimeoPrivateId'),
+              onPressed: () => Navigator.of(context).pushNamed('/fromVimeoPrivateId'),
             ),
             _button(
               'Custom Video player',
@@ -88,7 +85,7 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Widget _button(String text, {void Function()? onPressed}) {
+  Widget _button(String text, {void Function() onPressed}) {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(20),

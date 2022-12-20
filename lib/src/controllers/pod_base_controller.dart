@@ -3,13 +3,13 @@ part of 'pod_getx_video_controller.dart';
 
 class _PodBaseController extends GetxController {
   ///main video controller
-  VideoPlayerController? _videoCtr;
+  VideoPlayerController _videoCtr;
 
   ///
-  late PodVideoPlayerType _videoPlayerType;
+  PodVideoPlayerType _videoPlayerType;
 
   bool isMute = false;
-  FocusNode? keyboardFocusWeb;
+  FocusNode keyboardFocusWeb;
 
   bool autoPlay = true;
   bool _isWebAutoPlayDone = false;
@@ -27,23 +27,23 @@ class _PodBaseController extends GetxController {
 
   String _currentPaybackSpeed = '1x';
 
-  bool? isVideoUiBinded;
+  bool isVideoUiBinded;
 
-  bool? wasVideoPlayingOnUiDispose;
+  bool wasVideoPlayingOnUiDispose;
 
   int doubleTapForwardSeconds = 10;
-  String? playingVideoUrl;
+  String playingVideoUrl;
 
-  late BuildContext mainContext;
-  late BuildContext fullScreenContext;
+  BuildContext mainContext;
+  BuildContext fullScreenContext;
 
   ///**listners
 
   Future<void> videoListner() async {
-    if (!_videoCtr!.value.isInitialized) {
-      await _videoCtr!.initialize();
+    if (!_videoCtr.value.isInitialized) {
+      await _videoCtr.initialize();
     }
-    if (_videoCtr!.value.isInitialized) {
+    if (_videoCtr.value.isInitialized) {
       _listneToVideoState();
       _listneToVideoPosition();
       _listneToVolume();
@@ -51,10 +51,10 @@ class _PodBaseController extends GetxController {
     }
   }
 
-  void _webAutoPlay() => _videoCtr!.setVolume(1);
+  void _webAutoPlay() => _videoCtr.setVolume(1);
 
   void _listneToVolume() {
-    if (_videoCtr!.value.volume == 0) {
+    if (_videoCtr.value.volume == 0) {
       if (!isMute) {
         isMute = true;
         update(['volume']);
@@ -71,16 +71,16 @@ class _PodBaseController extends GetxController {
 
   void _listneToVideoState() {
     podVideoStateChanger(
-      _videoCtr!.value.isBuffering || !_videoCtr!.value.isInitialized
+      _videoCtr.value.isBuffering || !_videoCtr.value.isInitialized
           ? PodVideoState.loading
-          : _videoCtr!.value.isPlaying
+          : _videoCtr.value.isPlaying
               ? PodVideoState.playing
               : PodVideoState.paused,
     );
   }
 
   ///updates state with id `_podVideoState`
-  void podVideoStateChanger(PodVideoState? _val, {bool updateUi = true}) {
+  void podVideoStateChanger(PodVideoState _val, {bool updateUi = true}) {
     if (_podVideoState != (_val ?? _podVideoState)) {
       _podVideoState = _val ?? _podVideoState;
       if (updateUi) {
@@ -96,8 +96,7 @@ class _PodBaseController extends GetxController {
       update(['video-progress']);
       update(['update-all']);
     } else {
-      if (_videoPosition.inSeconds !=
-          (_videoCtr?.value.position ?? Duration.zero).inSeconds) {
+      if (_videoPosition.inSeconds != (_videoCtr?.value.position ?? Duration.zero).inSeconds) {
         _videoPosition = _videoCtr?.value.position ?? Duration.zero;
         update(['video-progress']);
         update(['update-all']);
@@ -106,9 +105,9 @@ class _PodBaseController extends GetxController {
   }
 
   void keyboadListner() {
-    if (keyboardFocusWeb != null && !keyboardFocusWeb!.hasFocus) {
-      if (keyboardFocusWeb!.canRequestFocus) {
-        keyboardFocusWeb!.requestFocus();
+    if (keyboardFocusWeb != null && !keyboardFocusWeb.hasFocus) {
+      if (keyboardFocusWeb.canRequestFocus) {
+        keyboardFocusWeb.requestFocus();
       }
     }
   }

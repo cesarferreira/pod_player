@@ -11,20 +11,19 @@ String podErrorString(String val) {
 }
 
 class VideoApis {
-  static Future<List<VideoQalityUrls>?> getVimeoVideoQualityUrls(
+  static Future<List<VideoQalityUrls>> getVimeoVideoQualityUrls(
     String videoId,
   ) async {
     try {
       final response = await http.get(
         Uri.parse('https://player.vimeo.com/video/$videoId/config'),
       );
-      final jsonData =
-          jsonDecode(response.body)['request']['files']['progressive'];
+      final jsonData = jsonDecode(response.body)['request']['files']['progressive'];
       return List.generate(
         jsonData.length,
         (index) => VideoQalityUrls(
           quality: int.parse(
-            (jsonData[index]['quality'] as String?)?.split('p').first ?? '0',
+            (jsonData[index]['quality'] as String)?.split('p').first ?? '0',
           ),
           url: jsonData[index]['url'],
         ),
@@ -42,7 +41,7 @@ class VideoApis {
     }
   }
 
-  static Future<List<VideoQalityUrls>?> getVimeoPrivateVideoQualityUrls(
+  static Future<List<VideoQalityUrls>> getVimeoPrivateVideoQualityUrls(
     String videoId,
     Map<String, String> httpHeader,
   ) async {
@@ -55,9 +54,8 @@ class VideoApis {
 
       final List<VideoQalityUrls> list = [];
       for (int i = 0; i < jsonData.length; i++) {
-        final String quality =
-            (jsonData[i]['rendition'] as String?)?.split('p').first ?? '0';
-        final int? number = int.tryParse(quality);
+        final String quality = (jsonData[i]['rendition'] as String)?.split('p').first ?? '0';
+        final int number = int.tryParse(quality);
         if (number != null && number != 0) {
           list.add(VideoQalityUrls(quality: number, url: jsonData[i]['link']));
         }
@@ -76,7 +74,7 @@ class VideoApis {
     }
   }
 
-  static Future<List<VideoQalityUrls>?> getYoutubeVideoQualityUrls(
+  static Future<List<VideoQalityUrls>> getYoutubeVideoQualityUrls(
     String youtubeIdOrUrl,
     bool live,
   ) async {
@@ -94,8 +92,7 @@ class VideoApis {
           ),
         );
       } else {
-        final manifest =
-            await yt.videos.streamsClient.getManifest(youtubeIdOrUrl);
+        final manifest = await yt.videos.streamsClient.getManifest(youtubeIdOrUrl);
         urls.addAll(
           manifest.muxed.map(
             (element) => VideoQalityUrls(

@@ -7,7 +7,7 @@ void main(List<String> args) {
 }
 
 class ListOfVideosApp extends StatelessWidget {
-  const ListOfVideosApp({Key? key}) : super(key: key);
+  const ListOfVideosApp({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +25,11 @@ class ListOfVideosApp extends StatelessWidget {
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => ListOfVideosScreen(
                           videosList: [
-                            PlayVideoFrom.asset(
-                                'assets/SampleVideo_720x480_20mb.mp4'),
-                            PlayVideoFrom.asset(
-                                'assets/SampleVideo_720x480_20mb.mp4'),
-                            PlayVideoFrom.asset(
-                                'assets/SampleVideo_720x480_20mb.mp4'),
-                            PlayVideoFrom.asset(
-                                'assets/SampleVideo_720x480_20mb.mp4'),
-                            PlayVideoFrom.asset(
-                                'assets/SampleVideo_720x480_20mb.mp4'),
+                            PlayVideoFrom.asset('assets/SampleVideo_720x480_20mb.mp4'),
+                            PlayVideoFrom.asset('assets/SampleVideo_720x480_20mb.mp4'),
+                            PlayVideoFrom.asset('assets/SampleVideo_720x480_20mb.mp4'),
+                            PlayVideoFrom.asset('assets/SampleVideo_720x480_20mb.mp4'),
+                            PlayVideoFrom.asset('assets/SampleVideo_720x480_20mb.mp4'),
                           ],
                         ),
                       ));
@@ -45,28 +40,17 @@ class ListOfVideosApp extends StatelessWidget {
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => ListOfVideosScreen(
                           videosList: [
-                            PlayVideoFrom.network(
-                                'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'),
-                            PlayVideoFrom.network(
-                                'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4'),
-                            PlayVideoFrom.network(
-                                'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'),
-                            PlayVideoFrom.network(
-                                'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4'),
-                            PlayVideoFrom.network(
-                                'http://techslides.com/demos/sample-videos/small.mp4'),
-                            PlayVideoFrom.network(
-                                'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4'),
-                            PlayVideoFrom.network(
-                                'http://techslides.com/demos/sample-videos/small.mp4'),
-                            PlayVideoFrom.network(
-                                'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4'),
-                            PlayVideoFrom.network(
-                                'http://techslides.com/demos/sample-videos/small.mp4'),
-                            PlayVideoFrom.network(
-                                'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4'),
-                            PlayVideoFrom.network(
-                                'http://techslides.com/demos/sample-videos/small.mp4'),
+                            PlayVideoFrom.network('http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'),
+                            PlayVideoFrom.network('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4'),
+                            PlayVideoFrom.network('https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'),
+                            PlayVideoFrom.network('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4'),
+                            PlayVideoFrom.network('http://techslides.com/demos/sample-videos/small.mp4'),
+                            PlayVideoFrom.network('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4'),
+                            PlayVideoFrom.network('http://techslides.com/demos/sample-videos/small.mp4'),
+                            PlayVideoFrom.network('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4'),
+                            PlayVideoFrom.network('http://techslides.com/demos/sample-videos/small.mp4'),
+                            PlayVideoFrom.network('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4'),
+                            PlayVideoFrom.network('http://techslides.com/demos/sample-videos/small.mp4'),
                           ],
                         ),
                       ));
@@ -82,8 +66,7 @@ class ListOfVideosApp extends StatelessWidget {
 
 class ListOfVideosScreen extends StatelessWidget {
   final List<PlayVideoFrom> videosList;
-  const ListOfVideosScreen({Key? key, required this.videosList})
-      : super(key: key);
+  const ListOfVideosScreen({Key key, @required this.videosList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -100,8 +83,7 @@ class ListOfVideosScreen extends StatelessWidget {
 
 class ListOfVideosViewer extends StatefulWidget {
   final List<PlayVideoFrom> videosList;
-  const ListOfVideosViewer({Key? key, required this.videosList})
-      : super(key: key);
+  const ListOfVideosViewer({Key key, @required this.videosList}) : super(key: key);
 
   @override
   State<ListOfVideosViewer> createState() => _ListOfVideosViewerState();

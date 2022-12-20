@@ -1,8 +1,8 @@
 part of 'pod_getx_video_controller.dart';
 
 class _PodVideoController extends _PodUiController {
-  Timer? showOverlayTimer;
-  Timer? showOverlayTimer1;
+  Timer showOverlayTimer;
+  Timer showOverlayTimer1;
 
   bool isOverlayVisible = true;
   bool isLooping = false;
@@ -25,17 +25,17 @@ class _PodVideoController extends _PodUiController {
   ///*seek video
   /// Seek video to a duration.
   Future<void> seekTo(Duration moment) async {
-    await _videoCtr!.seekTo(moment);
+    await _videoCtr.seekTo(moment);
   }
 
   /// Seek video forward by the duration.
   Future<void> seekForward(Duration videoSeekDuration) async {
-    await seekTo(_videoCtr!.value.position + videoSeekDuration);
+    await seekTo(_videoCtr.value.position + videoSeekDuration);
   }
 
   /// Seek video backward by the duration.
   Future<void> seekBackward(Duration videoSeekDuration) async {
-    await seekTo(_videoCtr!.value.position - videoSeekDuration);
+    await seekTo(_videoCtr.value.position - videoSeekDuration);
   }
 
   ///mute
@@ -100,7 +100,7 @@ class _PodVideoController extends _PodUiController {
   }
 
   ///toogle video player controls
-  void isShowOverlay(bool val, {Duration? delay}) {
+  void isShowOverlay(bool val, {Duration delay}) {
     showOverlayTimer1?.cancel();
     showOverlayTimer1 = Timer(delay ?? Duration.zero, () {
       if (isOverlayVisible != val) {
@@ -135,7 +135,7 @@ class _PodVideoController extends _PodUiController {
   }
 
   void setVideoPlayBack(String _speed) {
-    late double pickedSpeed;
+    double pickedSpeed;
 
     if (_speed == 'Normal') {
       pickedSpeed = 1.0;
@@ -163,7 +163,7 @@ class _PodVideoController extends _PodUiController {
     podLog('-full-screen-enable-entred');
     if (!isFullScreen) {
       if (onToggleFullScreen != null) {
-        await onToggleFullScreen!(true);
+        await onToggleFullScreen(true);
       } else {
         await Future.wait([
           SystemChrome.setPreferredOrientations(
@@ -193,7 +193,7 @@ class _PodVideoController extends _PodUiController {
     podLog('-full-screen-disable-entred');
     if (isFullScreen) {
       if (onToggleFullScreen != null) {
-        await onToggleFullScreen!(false);
+        await onToggleFullScreen(false);
       } else {
         await Future.wait([
           SystemChrome.setPreferredOrientations([
@@ -232,8 +232,7 @@ class _PodVideoController extends _PodUiController {
             tag: tag,
           ),
           reverseTransitionDuration: const Duration(milliseconds: 400),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-              FadeTransition(
+          transitionsBuilder: (context, animation, secondaryAnimation, child) => FadeTransition(
             opacity: animation,
             child: child,
           ),
@@ -246,10 +245,7 @@ class _PodVideoController extends _PodUiController {
   String calculateVideoDuration(Duration _duration) {
     final _totalHour = _duration.inHours == 0 ? '' : '${_duration.inHours}:';
     final _totalMinute = _duration.toString().split(':')[1];
-    final _totalSeconds = (_duration - Duration(minutes: _duration.inMinutes))
-        .inSeconds
-        .toString()
-        .padLeft(2, '0');
+    final _totalSeconds = (_duration - Duration(minutes: _duration.inMinutes)).inSeconds.toString().padLeft(2, '0');
     final String videoLength = '$_totalHour$_totalMinute:$_totalSeconds';
     return videoLength;
   }

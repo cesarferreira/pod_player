@@ -4,8 +4,8 @@ class _MobileBottomSheet extends StatelessWidget {
   final String tag;
 
   const _MobileBottomSheet({
-    Key? key,
-    required this.tag,
+    Key key,
+    @required this.tag,
   }) : super(key: key);
 
   @override
@@ -41,9 +41,7 @@ class _MobileBottomSheet extends StatelessWidget {
           _bottomSheetTiles(
             title: _podCtr.podPlayerLabels.loopVideo,
             icon: Icons.loop_rounded,
-            subText: _podCtr.isLooping
-                ? _podCtr.podPlayerLabels.optionEnabled
-                : _podCtr.podPlayerLabels.optionDisabled,
+            subText: _podCtr.isLooping ? _podCtr.podPlayerLabels.optionEnabled : _podCtr.podPlayerLabels.optionDisabled,
             onTap: () {
               Navigator.of(context).pop();
               _podCtr.toggleLooping();
@@ -75,10 +73,10 @@ class _MobileBottomSheet extends StatelessWidget {
   }
 
   ListTile _bottomSheetTiles({
-    required String title,
-    required IconData icon,
-    String? subText,
-    void Function()? onTap,
+    @required String title,
+    @required IconData icon,
+    String subText,
+    void Function() onTap,
   }) {
     return ListTile(
       leading: Icon(icon),
@@ -117,13 +115,13 @@ class _MobileBottomSheet extends StatelessWidget {
 }
 
 class _VideoQualitySelectorMob extends StatelessWidget {
-  final void Function()? onTap;
+  final void Function() onTap;
   final String tag;
 
   const _VideoQualitySelectorMob({
-    Key? key,
-    required this.onTap,
-    required this.tag,
+    Key key,
+    @required this.onTap,
+    @required this.tag,
   }) : super(key: key);
 
   @override
@@ -137,7 +135,7 @@ class _VideoQualitySelectorMob extends StatelessWidget {
               (e) => ListTile(
                 title: Text('${e.quality}p'),
                 onTap: () {
-                  onTap != null ? onTap!() : Navigator.of(context).pop();
+                  onTap != null ? onTap() : Navigator.of(context).pop();
 
                   _podCtr.changeVideoQuality(e.quality);
                 },
@@ -150,13 +148,13 @@ class _VideoQualitySelectorMob extends StatelessWidget {
 }
 
 class _VideoPlaybackSelectorMob extends StatelessWidget {
-  final void Function()? onTap;
+  final void Function() onTap;
   final String tag;
 
   const _VideoPlaybackSelectorMob({
-    Key? key,
-    required this.onTap,
-    required this.tag,
+    Key key,
+    @required this.onTap,
+    @required this.tag,
   }) : super(key: key);
 
   @override
@@ -170,7 +168,7 @@ class _VideoPlaybackSelectorMob extends StatelessWidget {
               (e) => ListTile(
                 title: Text(e),
                 onTap: () {
-                  onTap != null ? onTap!() : Navigator.of(context).pop();
+                  onTap != null ? onTap() : Navigator.of(context).pop();
                   _podCtr.setVideoPlayBack(e);
                 },
               ),
@@ -185,8 +183,8 @@ class _MobileOverlayBottomControlles extends StatelessWidget {
   final String tag;
 
   const _MobileOverlayBottomControlles({
-    Key? key,
-    required this.tag,
+    Key key,
+    @required this.tag,
   }) : super(key: key);
 
   @override
@@ -228,10 +226,8 @@ class _MobileOverlayBottomControlles extends StatelessWidget {
               const Spacer(),
               MaterialIconButton(
                 toolTipMesg: _podCtr.isFullScreen
-                    ? _podCtr.podPlayerLabels.exitFullScreen ??
-                        'Exit full screen${kIsWeb ? ' (f)' : ''}'
-                    : _podCtr.podPlayerLabels.fullscreen ??
-                        'Fullscreen${kIsWeb ? ' (f)' : ''}',
+                    ? _podCtr.podPlayerLabels.exitFullScreen ?? 'Exit full screen${kIsWeb ? ' (f)' : ''}'
+                    : _podCtr.podPlayerLabels.fullscreen ?? 'Fullscreen${kIsWeb ? ' (f)' : ''}',
                 color: itemColor,
                 onPressed: () {
                   if (_podCtr.isOverlayVisible) {
@@ -245,9 +241,7 @@ class _MobileOverlayBottomControlles extends StatelessWidget {
                   }
                 },
                 child: Icon(
-                  _podCtr.isFullScreen
-                      ? Icons.fullscreen_exit
-                      : Icons.fullscreen,
+                  _podCtr.isFullScreen ? Icons.fullscreen_exit : Icons.fullscreen,
                 ),
               ),
             ],

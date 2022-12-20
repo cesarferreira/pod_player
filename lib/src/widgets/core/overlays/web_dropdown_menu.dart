@@ -4,8 +4,8 @@ class _WebSettingsDropdown extends StatefulWidget {
   final String tag;
 
   const _WebSettingsDropdown({
-    Key? key,
-    required this.tag,
+    Key key,
+    @required this.tag,
   }) : super(key: key);
 
   @override
@@ -27,9 +27,7 @@ class _WebSettingsDropdownState extends State<_WebSettingsDropdown> {
             toolTipMesg: _podCtr.podPlayerLabels.settings,
             color: Colors.white,
             child: const Icon(Icons.settings),
-            onPressed: () => _podCtr.isFullScreen
-                ? _podCtr.isWebPopupOverlayOpen = true
-                : _podCtr.isWebPopupOverlayOpen = false,
+            onPressed: () => _podCtr.isFullScreen ? _podCtr.isWebPopupOverlayOpen = true : _podCtr.isWebPopupOverlayOpen = false,
             onTapDown: (details) async {
               final _settingsMenu = await showMenu<String>(
                 context: context,
@@ -48,9 +46,7 @@ class _WebSettingsDropdownState extends State<_WebSettingsDropdown> {
                     child: _bottomSheetTiles(
                       title: _podCtr.podPlayerLabels.loopVideo,
                       icon: Icons.loop_rounded,
-                      subText: _podCtr.isLooping
-                          ? _podCtr.podPlayerLabels.optionEnabled
-                          : _podCtr.podPlayerLabels.optionDisabled,
+                      subText: _podCtr.isLooping ? _podCtr.podPlayerLabels.optionEnabled : _podCtr.podPlayerLabels.optionDisabled,
                     ),
                   ),
                   PopupMenuItem(
@@ -151,9 +147,9 @@ class _WebSettingsDropdownState extends State<_WebSettingsDropdown> {
   }
 
   Widget _bottomSheetTiles({
-    required String title,
-    required IconData icon,
-    String? subText,
+    @required String title,
+    @required IconData icon,
+    String subText,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15),

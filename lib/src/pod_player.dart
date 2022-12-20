@@ -40,25 +40,25 @@ class PodVideoPlayer extends StatefulWidget {
   final bool matchFrameAspectRatioToVideo;
   final PodProgressBarConfig podProgressBarConfig;
   final PodPlayerLabels podPlayerLabels;
-  final Widget Function(OverLayOptions options)? overlayBuilder;
-  final Widget Function()? onVideoError;
-  final Widget? videoTitle;
-  final Color? backgroundColor;
-  final DecorationImage? videoThumbnail;
+  final Widget Function(OverLayOptions options) overlayBuilder;
+  final Widget Function() onVideoError;
+  final Widget videoTitle;
+  final Color backgroundColor;
+  final DecorationImage videoThumbnail;
 
   /// Optional callback, fired when full screen mode toggles.
   ///
   /// Important: If this method is set, the configuration of [DeviceOrientation]
   /// and [SystemUiMode] is up to you.
-  final Future<void> Function(bool isFullScreen)? onToggleFullScreen;
+  final Future<void> Function(bool isFullScreen) onToggleFullScreen;
 
   /// Sets a custom loading widget.
   /// If no widget is informed, a default [CircularProgressIndicator] will be shown.
-  final WidgetBuilder? onLoading;
+  final WidgetBuilder onLoading;
 
   PodVideoPlayer({
-    Key? key,
-    required this.controller,
+    Key key,
+    @required this.controller,
     this.frameAspectRatio = 16 / 9,
     this.videoAspectRatio = 16 / 9,
     this.alwaysShowProgressBar = true,
@@ -98,11 +98,10 @@ class PodVideoPlayer extends StatefulWidget {
   State<PodVideoPlayer> createState() => _PodVideoPlayerState();
 }
 
-class _PodVideoPlayerState extends State<PodVideoPlayer>
-    with TickerProviderStateMixin {
-  late PodGetXVideoController _podCtr;
+class _PodVideoPlayerState extends State<PodVideoPlayer> with TickerProviderStateMixin {
+  PodGetXVideoController _podCtr;
 
-  // late String tag;
+  // String tag;
   @override
   void initState() {
     super.initState();
@@ -182,9 +181,7 @@ class _PodVideoPlayerState extends State<PodVideoPlayer>
     return GetBuilder<PodGetXVideoController>(
       tag: widget.controller.getTag,
       builder: (_) {
-        _frameAspectRatio = widget.matchFrameAspectRatioToVideo
-            ? _podCtr.videoCtr?.value.aspectRatio ?? widget.frameAspectRatio
-            : widget.frameAspectRatio;
+        _frameAspectRatio = widget.matchFrameAspectRatioToVideo ? _podCtr.videoCtr?.value.aspectRatio ?? widget.frameAspectRatio : widget.frameAspectRatio;
         return Center(
           child: ColoredBox(
             color: widget.backgroundColor ?? Colors.black,
@@ -199,9 +196,7 @@ class _PodVideoPlayerState extends State<PodVideoPlayer>
 
                 return AspectRatio(
                   aspectRatio: _frameAspectRatio,
-                  child: _podCtr.videoCtr?.value.isInitialized ?? false
-                      ? _buildPlayer()
-                      : Center(child: circularProgressIndicator),
+                  child: _podCtr.videoCtr?.value.isInitialized ?? false ? _buildPlayer() : Center(child: circularProgressIndicator),
                 );
               },
             ),
@@ -244,9 +239,7 @@ class _PodVideoPlayerState extends State<PodVideoPlayer>
   }
 
   Widget _buildPlayer() {
-    final _videoAspectRatio = widget.matchVideoAspectRatioToFrame
-        ? _podCtr.videoCtr?.value.aspectRatio ?? widget.videoAspectRatio
-        : widget.videoAspectRatio;
+    final _videoAspectRatio = widget.matchVideoAspectRatioToFrame ? _podCtr.videoCtr?.value.aspectRatio ?? widget.videoAspectRatio : widget.videoAspectRatio;
     if (kIsWeb) {
       return GetBuilder<PodGetXVideoController>(
         tag: widget.controller.getTag,
@@ -254,7 +247,7 @@ class _PodVideoPlayerState extends State<PodVideoPlayer>
         builder: (_podCtr) {
           if (_podCtr.isFullScreen) return _thumbnailAndLoadingWidget();
           return _PodCoreVideoPlayer(
-            videoPlayerCtr: _podCtr.videoCtr!,
+            videoPlayerCtr: _podCtr.videoCtr,
             videoAspectRatio: _videoAspectRatio,
             tag: widget.controller.getTag,
           );
@@ -262,7 +255,7 @@ class _PodVideoPlayerState extends State<PodVideoPlayer>
       );
     } else {
       return _PodCoreVideoPlayer(
-        videoPlayerCtr: _podCtr.videoCtr!,
+        videoPlayerCtr: _podCtr.videoCtr,
         videoAspectRatio: _videoAspectRatio,
         tag: widget.controller.getTag,
       );

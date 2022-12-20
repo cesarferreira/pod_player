@@ -3,14 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class PlayVideoFromNetwork extends StatefulWidget {
-  const PlayVideoFromNetwork({Key? key}) : super(key: key);
+  const PlayVideoFromNetwork({Key key}) : super(key: key);
 
   @override
   State<PlayVideoFromNetwork> createState() => _PlayVideoFromAssetState();
 }
 
 class _PlayVideoFromAssetState extends State<PlayVideoFromNetwork> {
-  late final PodPlayerController controller;
+  PodPlayerController controller;
   final videoTextFieldCtr = TextEditingController();
 
   @override
@@ -72,8 +72,7 @@ class _PlayVideoFromAssetState extends State<PlayVideoFromNetwork> {
             decoration: const InputDecoration(
               labelText: 'Enter video url',
               floatingLabelBehavior: FloatingLabelBehavior.always,
-              hintText:
-                  'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+              hintText: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
               border: OutlineInputBorder(),
             ),
           ),

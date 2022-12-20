@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
+
 class VideoQalityUrls {
   int quality;
   String url;
   VideoQalityUrls({
-    required this.quality,
-    required this.url,
+    @required this.quality,
+    @required this.url,
   });
 
   @override

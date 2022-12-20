@@ -6,14 +6,13 @@ void main(List<String> args) {
 }
 
 class YoutubeApp extends StatelessWidget {
-  const YoutubeApp({Key? key}) : super(key: key);
+  const YoutubeApp({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar:
-            AppBar(title: const Text('Load youtube video from quality urls')),
+        appBar: AppBar(title: const Text('Load youtube video from quality urls')),
         body: const YoutubeVideoViewer(),
       ),
     );
@@ -21,14 +20,14 @@ class YoutubeApp extends StatelessWidget {
 }
 
 class YoutubeVideoViewer extends StatefulWidget {
-  const YoutubeVideoViewer({Key? key}) : super(key: key);
+  const YoutubeVideoViewer({Key key}) : super(key: key);
 
   @override
   State<YoutubeVideoViewer> createState() => _YoutubeVideoViewerState();
 }
 
 class _YoutubeVideoViewerState extends State<YoutubeVideoViewer> {
-  late final PodPlayerController controller;
+  PodPlayerController controller;
   bool isLoading = true;
   @override
   void initState() {
@@ -42,7 +41,7 @@ class _YoutubeVideoViewerState extends State<YoutubeVideoViewer> {
     );
     setState(() => isLoading = false);
     controller = PodPlayerController(
-      playVideoFrom: PlayVideoFrom.networkQualityUrls(videoUrls: urls!),
+      playVideoFrom: PlayVideoFrom.networkQualityUrls(videoUrls: urls),
       podPlayerConfig: const PodPlayerConfig(
         videoQualityPriority: [360],
       ),
@@ -51,8 +50,6 @@ class _YoutubeVideoViewerState extends State<YoutubeVideoViewer> {
 
   @override
   Widget build(BuildContext context) {
-    return isLoading
-        ? const Center(child: CircularProgressIndicator())
-        : Center(child: PodVideoPlayer(controller: controller));
+    return isLoading ? const Center(child: CircularProgressIndicator()) : Center(child: PodVideoPlayer(controller: controller));
   }
 }

@@ -6,7 +6,7 @@ void main(List<String> args) {
 }
 
 class VimeoApp extends StatelessWidget {
-  const VimeoApp({Key? key}) : super(key: key);
+  const VimeoApp({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +20,14 @@ class VimeoApp extends StatelessWidget {
 }
 
 class VimeoVideoViewer extends StatefulWidget {
-  const VimeoVideoViewer({Key? key}) : super(key: key);
+  const VimeoVideoViewer({Key key}) : super(key: key);
 
   @override
   State<VimeoVideoViewer> createState() => VimeoVideoViewerState();
 }
 
 class VimeoVideoViewerState extends State<VimeoVideoViewer> {
-  late final PodPlayerController controller;
+  PodPlayerController controller;
   bool isLoading = true;
   @override
   void initState() {
@@ -39,7 +39,7 @@ class VimeoVideoViewerState extends State<VimeoVideoViewer> {
     final urls = await PodPlayerController.getVimeoUrls('518228118');
     setState(() => isLoading = false);
     controller = PodPlayerController(
-      playVideoFrom: PlayVideoFrom.networkQualityUrls(videoUrls: urls!),
+      playVideoFrom: PlayVideoFrom.networkQualityUrls(videoUrls: urls),
       podPlayerConfig: const PodPlayerConfig(
         videoQualityPriority: [360],
       ),
@@ -48,8 +48,6 @@ class VimeoVideoViewerState extends State<VimeoVideoViewer> {
 
   @override
   Widget build(BuildContext context) {
-    return isLoading
-        ? const Center(child: CircularProgressIndicator())
-        : Center(child: PodVideoPlayer(controller: controller));
+    return isLoading ? const Center(child: CircularProgressIndicator()) : Center(child: PodVideoPlayer(controller: controller));
   }
 }

@@ -5,18 +5,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CustomVideoControlls extends StatefulWidget {
-  const CustomVideoControlls({Key? key}) : super(key: key);
+  const CustomVideoControlls({Key key}) : super(key: key);
 
   @override
   State<CustomVideoControlls> createState() => _CustomVideoControllsState();
 }
 
 class _CustomVideoControllsState extends State<CustomVideoControlls> {
-  late PodPlayerController controller;
-  bool? isVideoPlaying;
+  PodPlayerController controller;
+  bool isVideoPlaying;
   final videoTextFieldCtr = TextEditingController(
-    text:
-        'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+    text: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
   );
   final vimeoTextFieldCtr = TextEditingController(
     text: '518228118',
@@ -67,22 +66,13 @@ class _CustomVideoControllsState extends State<CustomVideoControlls> {
   Widget build(BuildContext context) {
     ///
     const sizeH20 = SizedBox(height: 20);
-    final totalHour = controller.currentVideoPosition.inHours == 0
-        ? '0'
-        : '${controller.currentVideoPosition.inHours}:';
-    final totalMinute =
-        controller.currentVideoPosition.toString().split(':')[1];
-    final totalSeconds = (controller.currentVideoPosition -
-            Duration(minutes: controller.currentVideoPosition.inMinutes))
-        .inSeconds
-        .toString()
-        .padLeft(2, '0');
+    final totalHour = controller.currentVideoPosition.inHours == 0 ? '0' : '${controller.currentVideoPosition.inHours}:';
+    final totalMinute = controller.currentVideoPosition.toString().split(':')[1];
+    final totalSeconds = (controller.currentVideoPosition - Duration(minutes: controller.currentVideoPosition.inMinutes)).inSeconds.toString().padLeft(2, '0');
 
     ///
     const videoTitle = Padding(
-      padding: kIsWeb
-          ? EdgeInsets.symmetric(vertical: 25, horizontal: 15)
-          : EdgeInsets.only(left: 15),
+      padding: kIsWeb ? EdgeInsets.symmetric(vertical: 25, horizontal: 15) : EdgeInsets.only(left: 15),
       child: Text(
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
         style: TextStyle(
@@ -149,46 +139,36 @@ class _CustomVideoControllsState extends State<CustomVideoControlls> {
                     sizeH20,
                     _loadVideoFromYoutube(),
                     sizeH20,
-                    _iconButton('Hide progress bar on overlay hidden',
-                        Icons.hide_source, onPressed: () {
+                    _iconButton('Hide progress bar on overlay hidden', Icons.hide_source, onPressed: () {
                       setState(() {
                         alwaysShowProgressBar = false;
                       });
                     }),
                     sizeH20,
-                    _iconButton('Show Overlay', Icons.slideshow_outlined,
-                        onPressed: () {
+                    _iconButton('Show Overlay', Icons.slideshow_outlined, onPressed: () {
                       controller.showOverlay();
                     }),
                     sizeH20,
-                    _iconButton('Hide Overlay', Icons.hide_image,
-                        onPressed: () {
+                    _iconButton('Hide Overlay', Icons.hide_image, onPressed: () {
                       controller.hideOverlay();
                     }),
-                    _iconButton('Backward video 5s', Icons.replay_5_rounded,
-                        onPressed: () {
+                    _iconButton('Backward video 5s', Icons.replay_5_rounded, onPressed: () {
                       controller.doubleTapVideoBackward(5);
                     }),
                     sizeH20,
-                    _iconButton('Forward video 5s', Icons.forward_5_rounded,
-                        onPressed: () {
+                    _iconButton('Forward video 5s', Icons.forward_5_rounded, onPressed: () {
                       controller.doubleTapVideoForward(5);
                     }),
                     sizeH20,
-                    _iconButton('Video Jump to 01:00 minute',
-                        Icons.fast_forward_rounded, onPressed: () {
+                    _iconButton('Video Jump to 01:00 minute', Icons.fast_forward_rounded, onPressed: () {
                       controller.videoSeekTo(const Duration(minutes: 1));
                     }),
                     sizeH20,
-                    _iconButton('Enable full screen', Icons.fullscreen,
-                        onPressed: () {
+                    _iconButton('Enable full screen', Icons.fullscreen, onPressed: () {
                       controller.enableFullScreen();
                     }),
                     sizeH20,
-                    _iconButton(
-                        controller.isMute ? 'UnMute video' : 'mute video',
-                        controller.isMute ? Icons.volume_up : Icons.volume_off,
-                        onPressed: () {
+                    _iconButton(controller.isMute ? 'UnMute video' : 'mute video', controller.isMute ? Icons.volume_up : Icons.volume_off, onPressed: () {
                       controller.toggleVolume();
                     }),
                     sizeH20,
@@ -226,7 +206,7 @@ class _CustomVideoControllsState extends State<CustomVideoControlls> {
                   strokeWidth: 1,
                 ),
               )
-            : Icon(!isVideoPlaying! ? Icons.play_arrow : Icons.pause),
+            : Icon(!isVideoPlaying ? Icons.play_arrow : Icons.pause),
       ),
     );
   }
@@ -267,8 +247,7 @@ class _CustomVideoControllsState extends State<CustomVideoControlls> {
               if (!mounted) return;
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
             } catch (e) {
-              snackBar(
-                  "Unable to load,${kIsWeb ? 'Please enable CORS in web' : ''}  \n$e");
+              snackBar("Unable to load,${kIsWeb ? 'Please enable CORS in web' : ''}  \n$e");
             }
           },
           child: const Text('Load Video'),
@@ -313,8 +292,7 @@ class _CustomVideoControllsState extends State<CustomVideoControlls> {
               if (!mounted) return;
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
             } catch (e) {
-              snackBar(
-                  "Unable to load,${kIsWeb ? 'Please enable CORS in web' : ''}  \n$e");
+              snackBar("Unable to load,${kIsWeb ? 'Please enable CORS in web' : ''}  \n$e");
             }
           },
           child: const Text('Load Video'),
@@ -372,13 +350,8 @@ class _CustomVideoControllsState extends State<CustomVideoControlls> {
       );
   }
 
-  ElevatedButton _iconButton(String text, IconData icon,
-      {void Function()? onPressed}) {
+  ElevatedButton _iconButton(String text, IconData icon, {void Function() onPressed}) {
     return ElevatedButton.icon(
-        onPressed: onPressed ?? () {},
-        style: ElevatedButton.styleFrom(
-            fixedSize: const Size.fromWidth(double.maxFinite)),
-        icon: Icon(icon),
-        label: Text(text));
+        onPressed: onPressed ?? () {}, style: ElevatedButton.styleFrom(fixedSize: const Size.fromWidth(double.maxFinite)), icon: Icon(icon), label: Text(text));
   }
 }

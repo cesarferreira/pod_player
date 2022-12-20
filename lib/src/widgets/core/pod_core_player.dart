@@ -6,10 +6,10 @@ class _PodCoreVideoPlayer extends StatelessWidget {
   final String tag;
 
   const _PodCoreVideoPlayer({
-    Key? key,
-    required this.videoPlayerCtr,
-    required this.videoAspectRatio,
-    required this.tag,
+    Key key,
+    @required this.videoPlayerCtr,
+    @required this.videoAspectRatio,
+    @required this.tag,
   }) : super(key: key);
 
   @override
@@ -19,9 +19,7 @@ class _PodCoreVideoPlayer extends StatelessWidget {
       builder: (_ctrx) {
         return RawKeyboardListener(
           autofocus: true,
-          focusNode:
-              (_podCtr.isFullScreen ? FocusNode() : _podCtr.keyboardFocusWeb) ??
-                  FocusNode(),
+          focusNode: (_podCtr.isFullScreen ? FocusNode() : _podCtr.keyboardFocusWeb) ?? FocusNode(),
           onKey: (value) => _podCtr.onKeyBoardEvents(
             event: value,
             appContext: _ctrx,
@@ -47,8 +45,7 @@ class _PodCoreVideoPlayer extends StatelessWidget {
                       return const SizedBox();
                     }
 
-                    if (_podCtr.podVideoState == PodVideoState.paused &&
-                        _podCtr.videoPosition == Duration.zero) {
+                    if (_podCtr.podVideoState == PodVideoState.paused && _podCtr.videoPosition == Duration.zero) {
                       return SizedBox.expand(
                         child: TweenAnimationBuilder<double>(
                           builder: (context, value, child) => Opacity(
@@ -75,52 +72,7 @@ class _PodCoreVideoPlayer extends StatelessWidget {
                   tag: tag,
                   id: 'podVideoState',
                   builder: (_podCtr) {
-                    final loadingWidget = _podCtr.onLoading?.call(context) ??
-                        const Center(
-                          child: CircularProgressIndicator(
-                            backgroundColor: Colors.transparent,
-                            color: Colors.white,
-                            strokeWidth: 2,
-                          ),
-                        );
-
-                    if (kIsWeb) {
-                      switch (_podCtr.podVideoState) {
-                        case PodVideoState.loading:
-                          return loadingWidget;
-                        case PodVideoState.paused:
-                          return const Center(
-                            child: Icon(
-                              Icons.play_arrow,
-                              size: 45,
-                              color: Colors.white,
-                            ),
-                          );
-                        case PodVideoState.playing:
-                          return Center(
-                            child: TweenAnimationBuilder<double>(
-                              builder: (context, value, child) => Opacity(
-                                opacity: value,
-                                child: child,
-                              ),
-                              tween: Tween<double>(begin: 1, end: 0),
-                              duration: const Duration(seconds: 1),
-                              child: const Icon(
-                                Icons.pause,
-                                size: 45,
-                                color: Colors.white,
-                              ),
-                            ),
-                          );
-                        case PodVideoState.error:
-                          return const SizedBox();
-                      }
-                    } else {
-                      if (_podCtr.podVideoState == PodVideoState.loading) {
-                        return loadingWidget;
-                      }
-                      return const SizedBox();
-                    }
+                    return _cenas(context, _podCtr);
                   },
                 ),
               ),
@@ -133,16 +85,14 @@ class _PodCoreVideoPlayer extends StatelessWidget {
                       : GetBuilder<PodGetXVideoController>(
                           tag: tag,
                           id: 'overlay',
-                          builder: (_podCtr) => _podCtr.isOverlayVisible ||
-                                  !_podCtr.alwaysShowProgressBar
+                          builder: (_podCtr) => _podCtr.isOverlayVisible || !_podCtr.alwaysShowProgressBar
                               ? const SizedBox()
                               : Align(
                                   alignment: Alignment.bottomCenter,
                                   child: PodProgressBar(
                                     tag: tag,
                                     alignment: Alignment.bottomCenter,
-                                    podProgressBarConfig:
-                                        _podCtr.podProgressBarConfig,
+                                    podProgressBarConfig: _podCtr.podProgressBarConfig,
                                   ),
                                 ),
                         ),
@@ -152,5 +102,54 @@ class _PodCoreVideoPlayer extends StatelessWidget {
         );
       },
     );
+  }
+
+  Widget _cenas(BuildContext context, PodGetXVideoController _podCtr) {
+    final loadingWidget = _podCtr.onLoading?.call(context) ??
+        const Center(
+          child: CircularProgressIndicator(
+            backgroundColor: Colors.transparent,
+            color: Colors.white,
+            strokeWidth: 2,
+          ),
+        );
+
+    // if (kIsWeb) {
+    //   switch (_podCtr.podVideoState) {
+    //     case PodVideoState.loading:
+    //       return loadingWidget;
+    //     case PodVideoState.paused:
+    //       return const Center(
+    //         child: Icon(
+    //           Icons.play_arrow,
+    //           size: 45,
+    //           color: Colors.white,
+    //         ),
+    //       );
+    //     case PodVideoState.playing:
+    //       return Center(
+    //         child: TweenAnimationBuilder<double>(
+    //           builder: (context, value, child) => Opacity(
+    //             opacity: value,
+    //             child: child,
+    //           ),
+    //           tween: Tween<double>(begin: 1, end: 0),
+    //           duration: const Duration(seconds: 1),
+    //           child: const Icon(
+    //             Icons.pause,
+    //             size: 45,
+    //             color: Colors.white,
+    //           ),
+    //         ),
+    //       );
+    //     case PodVideoState.error:
+    //       return const SizedBox();
+    //   }
+    // } else {
+    if (_podCtr.podVideoState == PodVideoState.loading) {
+      return loadingWidget;
+    }
+    return const SizedBox();
+    // }
   }
 }

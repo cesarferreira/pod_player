@@ -4,8 +4,8 @@ class _MobileOverlay extends StatelessWidget {
   final String tag;
 
   const _MobileOverlay({
-    Key? key,
-    required this.tag,
+    Key key,
+    @required this.tag,
   }) : super(key: key);
 
   @override
@@ -21,9 +21,7 @@ class _MobileOverlay extends StatelessWidget {
             Expanded(
               child: _VideoGestureDetector(
                 tag: tag,
-                onDoubleTap: _isRtl()
-                    ? _podCtr.onRightDoubleTap
-                    : _podCtr.onLeftDoubleTap,
+                onDoubleTap: _isRtl() ? _podCtr.onRightDoubleTap : _podCtr.onLeftDoubleTap,
                 child: ColoredBox(
                   color: overlayColor,
                   child: _LeftRightDoubleTapBox(
@@ -48,9 +46,7 @@ class _MobileOverlay extends StatelessWidget {
             Expanded(
               child: _VideoGestureDetector(
                 tag: tag,
-                onDoubleTap: _isRtl()
-                    ? _podCtr.onLeftDoubleTap
-                    : _podCtr.onRightDoubleTap,
+                onDoubleTap: _isRtl() ? _podCtr.onLeftDoubleTap : _podCtr.onRightDoubleTap,
                 child: ColoredBox(
                   color: overlayColor,
                   child: _LeftRightDoubleTapBox(
@@ -127,9 +123,9 @@ class _LeftRightDoubleTapBox extends StatelessWidget {
   final String tag;
   final bool isLeft;
   const _LeftRightDoubleTapBox({
-    Key? key,
-    required this.tag,
-    required this.isLeft,
+    Key key,
+    @required this.tag,
+    @required this.isLeft,
   }) : super(key: key);
 
   @override
@@ -153,13 +149,9 @@ class _LeftRightDoubleTapBox extends StatelessWidget {
                 alignment: Alignment.center,
                 children: [
                   Lottie.asset(
-                    isLeft
-                        ? 'packages/pod_player/assets/forward_left.json'
-                        : 'packages/pod_player/assets/forward_right.json',
+                    isLeft ? 'packages/pod_player/assets/forward_left.json' : 'packages/pod_player/assets/forward_right.json',
                   ),
-                  if (isLeft
-                      ? _podCtr.isLeftDbTapIconVisible
-                      : _podCtr.isRightDbTapIconVisible)
+                  if (isLeft ? _podCtr.isLeftDbTapIconVisible : _podCtr.isRightDbTapIconVisible)
                     Transform.translate(
                       offset: const Offset(0, 40),
                       child: Text(

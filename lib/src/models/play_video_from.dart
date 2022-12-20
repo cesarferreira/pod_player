@@ -1,21 +1,23 @@
+import 'package:flutter/cupertino.dart';
+
 import '../../pod_player.dart';
 
 class PlayVideoFrom {
-  final String? dataSource;
+  final String dataSource;
   final PodVideoPlayerType playerType;
-  final VideoFormat? formatHint;
-  final String? package;
+  final VideoFormat formatHint;
+  final String package;
   final dynamic file;
-  final List<VideoQalityUrls>? videoQualityUrls;
-  final Future<ClosedCaptionFile>? closedCaptionFile;
-  final VideoPlayerOptions? videoPlayerOptions;
+  final List<VideoQalityUrls> videoQualityUrls;
+  final Future<ClosedCaptionFile> closedCaptionFile;
+  final VideoPlayerOptions videoPlayerOptions;
   final Map<String, String> httpHeaders;
   final bool live;
 
   const PlayVideoFrom._({
     this.live = false,
     this.dataSource,
-    required this.playerType,
+    @required this.playerType,
     this.formatHint,
     this.package,
     this.file,
@@ -27,9 +29,9 @@ class PlayVideoFrom {
 
   factory PlayVideoFrom.network(
     String dataSource, {
-    VideoFormat? formatHint,
-    Future<ClosedCaptionFile>? closedCaptionFile,
-    VideoPlayerOptions? videoPlayerOptions,
+    VideoFormat formatHint,
+    Future<ClosedCaptionFile> closedCaptionFile,
+    VideoPlayerOptions videoPlayerOptions,
     Map<String, String> httpHeaders = const {},
   }) {
     return PlayVideoFrom._(
@@ -44,9 +46,9 @@ class PlayVideoFrom {
 
   factory PlayVideoFrom.asset(
     String dataSource, {
-    String? package,
-    Future<ClosedCaptionFile>? closedCaptionFile,
-    VideoPlayerOptions? videoPlayerOptions,
+    String package,
+    Future<ClosedCaptionFile> closedCaptionFile,
+    VideoPlayerOptions videoPlayerOptions,
   }) {
     return PlayVideoFrom._(
       playerType: PodVideoPlayerType.asset,
@@ -61,8 +63,8 @@ class PlayVideoFrom {
   ///[file] is `File` Datatype import it from `dart:io`
   factory PlayVideoFrom.file(
     dynamic file, {
-    Future<ClosedCaptionFile>? closedCaptionFile,
-    VideoPlayerOptions? videoPlayerOptions,
+    Future<ClosedCaptionFile> closedCaptionFile,
+    VideoPlayerOptions videoPlayerOptions,
   }) {
     return PlayVideoFrom._(
       file: file,
@@ -74,9 +76,9 @@ class PlayVideoFrom {
 
   factory PlayVideoFrom.vimeo(
     String dataSource, {
-    VideoFormat? formatHint,
-    Future<ClosedCaptionFile>? closedCaptionFile,
-    VideoPlayerOptions? videoPlayerOptions,
+    VideoFormat formatHint,
+    Future<ClosedCaptionFile> closedCaptionFile,
+    VideoPlayerOptions videoPlayerOptions,
     Map<String, String> httpHeaders = const {},
   }) {
     return PlayVideoFrom._(
@@ -91,9 +93,9 @@ class PlayVideoFrom {
 
   factory PlayVideoFrom.vimeoPrivateVideos(
     String dataSource, {
-    VideoFormat? formatHint,
-    Future<ClosedCaptionFile>? closedCaptionFile,
-    VideoPlayerOptions? videoPlayerOptions,
+    VideoFormat formatHint,
+    Future<ClosedCaptionFile> closedCaptionFile,
+    VideoPlayerOptions videoPlayerOptions,
     Map<String, String> httpHeaders = const {},
   }) {
     return PlayVideoFrom._(
@@ -108,9 +110,9 @@ class PlayVideoFrom {
   factory PlayVideoFrom.youtube(
     String dataSource, {
     bool live = false,
-    VideoFormat? formatHint,
-    Future<ClosedCaptionFile>? closedCaptionFile,
-    VideoPlayerOptions? videoPlayerOptions,
+    VideoFormat formatHint,
+    Future<ClosedCaptionFile> closedCaptionFile,
+    VideoPlayerOptions videoPlayerOptions,
     Map<String, String> httpHeaders = const {},
   }) {
     return PlayVideoFrom._(
@@ -124,10 +126,10 @@ class PlayVideoFrom {
     );
   }
   factory PlayVideoFrom.networkQualityUrls({
-    required List<VideoQalityUrls> videoUrls,
-    VideoFormat? formatHint,
-    Future<ClosedCaptionFile>? closedCaptionFile,
-    VideoPlayerOptions? videoPlayerOptions,
+    @required List<VideoQalityUrls> videoUrls,
+    VideoFormat formatHint,
+    Future<ClosedCaptionFile> closedCaptionFile,
+    VideoPlayerOptions videoPlayerOptions,
     Map<String, String> httpHeaders = const {},
   }) {
     return PlayVideoFrom._(

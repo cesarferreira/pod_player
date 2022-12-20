@@ -20,7 +20,7 @@ part 'pod_video_quality_controller.dart';
 
 class PodGetXVideoController extends _PodGesturesController {
   ///main videoplayer controller
-  VideoPlayerController? get videoCtr => _videoCtr;
+  VideoPlayerController get videoCtr => _videoCtr;
 
   ///podVideoPlayer state notifier
   PodVideoState get podVideoState => _podVideoState;
@@ -37,11 +37,11 @@ class PodGetXVideoController extends _PodGesturesController {
   Duration get videoPosition => _videoPosition;
 
   bool controllerInitialized = false;
-  late PodPlayerConfig podPlayerConfig;
-  late PlayVideoFrom playVideoFrom;
+  PodPlayerConfig podPlayerConfig;
+  PlayVideoFrom playVideoFrom;
   void config({
-    required PlayVideoFrom playVideoFrom,
-    required PodPlayerConfig playerConfig,
+    @required PlayVideoFrom playVideoFrom,
+    @required PodPlayerConfig playerConfig,
   }) {
     this.playVideoFrom = playVideoFrom;
     _videoPlayerType = playVideoFrom.playerType;
@@ -69,8 +69,7 @@ class PodGetXVideoController extends _PodGesturesController {
 
       update(['update-all']);
       // ignore: unawaited_futures
-      Future.delayed(const Duration(milliseconds: 600))
-          .then((value) => _isWebAutoPlayDone = true);
+      Future.delayed(const Duration(milliseconds: 600)).then((value) => _isWebAutoPlayDone = true);
     } catch (e) {
       podVideoStateChanger(PodVideoState.error);
       update(['errorState']);
@@ -86,7 +85,7 @@ class PodGetXVideoController extends _PodGesturesController {
 
         ///
         _videoCtr = VideoPlayerController.network(
-          playVideoFrom.dataSource!,
+          playVideoFrom.dataSource,
           closedCaptionFile: playVideoFrom.closedCaptionFile,
           formatHint: playVideoFrom.formatHint,
           videoPlayerOptions: playVideoFrom.videoPlayerOptions,
@@ -97,7 +96,7 @@ class PodGetXVideoController extends _PodGesturesController {
       case PodVideoPlayerType.networkQualityUrls:
         final _url = await getUrlFromVideoQualityUrls(
           qualityList: podPlayerConfig.videoQualityPriority,
-          videoUrls: playVideoFrom.videoQualityUrls!,
+          videoUrls: playVideoFrom.videoQualityUrls,
         );
 
         ///
@@ -113,7 +112,7 @@ class PodGetXVideoController extends _PodGesturesController {
         break;
       case PodVideoPlayerType.youtube:
         final _urls = await getVideoQualityUrlsFromYoutube(
-          playVideoFrom.dataSource!,
+          playVideoFrom.dataSource,
           playVideoFrom.live,
         );
         final _url = await getUrlFromVideoQualityUrls(
@@ -133,7 +132,7 @@ class PodGetXVideoController extends _PodGesturesController {
 
         break;
       case PodVideoPlayerType.vimeo:
-        await getQualityUrlsFromVimeoId(playVideoFrom.dataSource!);
+        await getQualityUrlsFromVimeoId(playVideoFrom.dataSource);
         final _url = await getUrlFromVideoQualityUrls(
           qualityList: podPlayerConfig.videoQualityPriority,
           videoUrls: vimeoOrVideoUrls,
@@ -153,7 +152,7 @@ class PodGetXVideoController extends _PodGesturesController {
 
         ///
         _videoCtr = VideoPlayerController.asset(
-          playVideoFrom.dataSource!,
+          playVideoFrom.dataSource,
           closedCaptionFile: playVideoFrom.closedCaptionFile,
           package: playVideoFrom.package,
           videoPlayerOptions: playVideoFrom.videoPlayerOptions,
@@ -168,7 +167,7 @@ class PodGetXVideoController extends _PodGesturesController {
 
         ///
         _videoCtr = VideoPlayerController.file(
-          playVideoFrom.file!,
+          playVideoFrom.file,
           closedCaptionFile: playVideoFrom.closedCaptionFile,
           videoPlayerOptions: playVideoFrom.videoPlayerOptions,
         );
@@ -176,7 +175,7 @@ class PodGetXVideoController extends _PodGesturesController {
         break;
       case PodVideoPlayerType.vimeoPrivateVideos:
         await getQualityUrlsFromVimeoPrivateId(
-          playVideoFrom.dataSource!,
+          playVideoFrom.dataSource,
           playVideoFrom.httpHeaders,
         );
         final _url = await getUrlFromVideoQualityUrls(
@@ -199,9 +198,9 @@ class PodGetXVideoController extends _PodGesturesController {
 
   ///Listning on keyboard events
   void onKeyBoardEvents({
-    required RawKeyEvent event,
-    required BuildContext appContext,
-    required String tag,
+    @required RawKeyEvent event,
+    @required BuildContext appContext,
+    @required String tag,
   }) {
     if (kIsWeb) {
       if (event.isKeyPressed(LogicalKeyboardKey.space)) {
@@ -220,8 +219,7 @@ class PodGetXVideoController extends _PodGesturesController {
         onRightDoubleTap();
         return;
       }
-      if (event.isKeyPressed(LogicalKeyboardKey.keyF) &&
-          event.logicalKey.keyLabel == 'F') {
+      if (event.isKeyPressed(LogicalKeyboardKey.keyF) && event.logicalKey.keyLabel == 'F') {
         toggleFullScreenOnWeb(appContext, tag);
       }
       if (event.isKeyPressed(LogicalKeyboardKey.escape)) {
@@ -284,8 +282,8 @@ class PodGetXVideoController extends _PodGesturesController {
   }
 
   Future<void> changeVideo({
-    required PlayVideoFrom playVideoFrom,
-    required PodPlayerConfig playerConfig,
+    @required PlayVideoFrom playVideoFrom,
+    @required PodPlayerConfig playerConfig,
   }) async {
     _videoCtr?.removeListener(videoListner);
     podVideoStateChanger(PodVideoState.paused);

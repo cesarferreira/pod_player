@@ -4,8 +4,8 @@ class _VideoOverlays extends StatelessWidget {
   final String tag;
 
   const _VideoOverlays({
-    Key? key,
-    required this.tag,
+    Key key,
+    @required this.tag,
   }) : super(key: key);
 
   @override
@@ -38,7 +38,7 @@ class _VideoOverlays extends StatelessWidget {
 
           /// Returns the custom overlay, otherwise returns the default
           /// overlay with gesture detector
-          return _podCtr.overlayBuilder!(overlayOptions);
+          return _podCtr.overlayBuilder(overlayOptions);
         },
       );
     } else {

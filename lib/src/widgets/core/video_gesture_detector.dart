@@ -1,17 +1,17 @@
 part of 'package:pod_player/src/pod_player.dart';
 
 class _VideoGestureDetector extends StatelessWidget {
-  final Widget? child;
-  final void Function()? onDoubleTap;
-  final void Function()? onTap;
+  final Widget child;
+  final void Function() onDoubleTap;
+  final void Function() onTap;
   final String tag;
 
   const _VideoGestureDetector({
-    Key? key,
+    Key key,
     this.child,
     this.onDoubleTap,
     this.onTap,
-    required this.tag,
+    @required this.tag,
   }) : super(key: key);
 
   @override

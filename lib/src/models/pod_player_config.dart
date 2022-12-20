@@ -20,11 +20,11 @@ class PodPlayerConfig {
   });
 
   PodPlayerConfig copyWith({
-    bool? autoPlay,
-    bool? isLooping,
-    bool? forcedVideoFocus,
-    bool? wakelockEnabled,
-    List<int>? videoQualityPriority,
+    bool autoPlay,
+    bool isLooping,
+    bool forcedVideoFocus,
+    bool wakelockEnabled,
+    List<int> videoQualityPriority,
   }) {
     return PodPlayerConfig(
       autoPlay: autoPlay ?? this.autoPlay,

@@ -9,7 +9,7 @@ void main(List<String> args) {
 }
 
 class ListOfVideosApp extends StatelessWidget {
-  const ListOfVideosApp({Key? key}) : super(key: key);
+  const ListOfVideosApp({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,28 +17,23 @@ class ListOfVideosApp extends StatelessWidget {
       home: ListOfVideosScreen(
         controllers: [
           PodPlayerController(
-            playVideoFrom: PlayVideoFrom.youtube(
-                'https://www.youtube.com/watch?v=bk6Xst6euQk'),
+            playVideoFrom: PlayVideoFrom.youtube('https://www.youtube.com/watch?v=bk6Xst6euQk'),
             podPlayerConfig: const PodPlayerConfig(autoPlay: false),
           ),
           PodPlayerController(
-            playVideoFrom:
-                PlayVideoFrom.youtube('https://youtu.be/A3ltMaM6noM'),
+            playVideoFrom: PlayVideoFrom.youtube('https://youtu.be/A3ltMaM6noM'),
             podPlayerConfig: const PodPlayerConfig(autoPlay: false),
           ),
           PodPlayerController(
-            playVideoFrom: PlayVideoFrom.youtube(
-                'https://www.youtube.com/watch?v=TjBA6jy4ako'),
+            playVideoFrom: PlayVideoFrom.youtube('https://www.youtube.com/watch?v=TjBA6jy4ako'),
             podPlayerConfig: const PodPlayerConfig(autoPlay: false),
           ),
           PodPlayerController(
-            playVideoFrom: PlayVideoFrom.youtube(
-                'https://www.youtube.com/watch?v=HqFgRHTuDyc'),
+            playVideoFrom: PlayVideoFrom.youtube('https://www.youtube.com/watch?v=HqFgRHTuDyc'),
             podPlayerConfig: const PodPlayerConfig(autoPlay: false),
           ),
           PodPlayerController(
-            playVideoFrom: PlayVideoFrom.youtube(
-                'https://www.youtube.com/watch?v=GpxD-T060RY'),
+            playVideoFrom: PlayVideoFrom.youtube('https://www.youtube.com/watch?v=GpxD-T060RY'),
             podPlayerConfig: const PodPlayerConfig(autoPlay: false),
           ),
         ],
@@ -50,8 +45,7 @@ class ListOfVideosApp extends StatelessWidget {
 class ListOfVideosScreen extends StatelessWidget {
   final List<PodPlayerController> controllers;
 
-  const ListOfVideosScreen({Key? key, required this.controllers})
-      : super(key: key);
+  const ListOfVideosScreen({Key key, @required this.controllers}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -76,9 +70,9 @@ class VideoViewer extends StatefulWidget {
   final List<PodPlayerController> controllers;
 
   const VideoViewer({
-    Key? key,
-    required this.controller,
-    required this.controllers,
+    Key key,
+    @required this.controller,
+    @required this.controllers,
   }) : super(key: key);
 
   @override
@@ -128,9 +122,7 @@ class VideoViewerState extends State<VideoViewer> {
                     const SizedBox(width: 10),
                     ElevatedButton(
                       child: Text(
-                        options.podVideoState == PodVideoState.paused
-                            ? 'Play'
-                            : 'Pause',
+                        options.podVideoState == PodVideoState.paused ? 'Play' : 'Pause',
                       ),
                       onPressed: () {
                         widget.controller.togglePlayPause();

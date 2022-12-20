@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:pod_player/pod_player.dart';
 
 class PlayVideoFromYoutube extends StatefulWidget {
-  const PlayVideoFromYoutube({Key? key}) : super(key: key);
+  const PlayVideoFromYoutube({Key key}) : super(key: key);
 
   @override
   State<PlayVideoFromYoutube> createState() => _PlayVideoFromVimeoIdState();
 }
 
 class _PlayVideoFromVimeoIdState extends State<PlayVideoFromYoutube> {
-  late final PodPlayerController controller;
+  PodPlayerController controller;
   final videoTextFieldCtr = TextEditingController();
   @override
   void initState() {

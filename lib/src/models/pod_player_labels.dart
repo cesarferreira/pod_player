@@ -1,11 +1,11 @@
 class PodPlayerLabels {
-  final String? play;
-  final String? pause;
-  final String? mute;
-  final String? unmute;
+  final String play;
+  final String pause;
+  final String mute;
+  final String unmute;
   final String settings;
-  final String? fullscreen;
-  final String? exitFullScreen;
+  final String fullscreen;
+  final String exitFullScreen;
   final String loopVideo;
   final String playbackSpeed;
   final String quality;

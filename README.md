@@ -217,14 +217,14 @@ import 'package:pod_player/pod_player.dart';
 import 'package:flutter/material.dart';
 
 class PlayVideoFromNetwork extends StatefulWidget {
-  const PlayVideoFromNetwork({Key? key}) : super(key: key);
+  const PlayVideoFromNetwork({Key key}) : super(key: key);
 
   @override
   State<PlayVideoFromNetwork> createState() => _PlayVideoFromNetworkState();
 }
 
 class _PlayVideoFromNetworkState extends State<PlayVideoFromNetwork> {
-  late final PodPlayerController controller;
+  final PodPlayerController controller;
 
   @override
   void initState() {
@@ -306,14 +306,14 @@ import 'package:pod_player/pod_player.dart';
 import 'package:flutter/material.dart';
 
 class PlayVideoFromYoutube extends StatefulWidget {
-  const PlayVideoFromYoutube({Key? key}) : super(key: key);
+  const PlayVideoFromYoutube({Key key}) : super(key: key);
 
   @override
   State<PlayVideoFromYoutube> createState() => _PlayVideoFromYoutubeState();
 }
 
 class _PlayVideoFromYoutubeState extends State<PlayVideoFromYoutube> {
-  late final PodPlayerController controller;
+  final PodPlayerController controller;
 
   @override
   void initState() {
@@ -348,14 +348,14 @@ import 'package:pod_player/pod_player.dart';
 import 'package:flutter/material.dart';
 
 class PlayVideoFromVimeo extends StatefulWidget {
-  const PlayVideoFromVimeo({Key? key}) : super(key: key);
+  const PlayVideoFromVimeo({Key key}) : super(key: key);
 
   @override
   State<PlayVideoFromVimeo> createState() => _PlayVideoFromVimeoState();
 }
 
 class _PlayVideoFromVimeoState extends State<PlayVideoFromVimeo> {
-  late final PodPlayerController controller;
+  final PodPlayerController controller;
 
   @override
   void initState() {
@@ -389,7 +389,7 @@ import 'package:pod_player/pod_player.dart';
 import 'package:flutter/material.dart';
 
 class PlayVideoFromVimeoPrivateVideo extends StatefulWidget {
-  const PlayVideoFromVimeoPrivateVideo({Key? key}) : super(key: key);
+  const PlayVideoFromVimeoPrivateVideo({Key key}) : super(key: key);
 
   @override
   State<PlayVideoFromVimeoPrivateVideo> createState() =>
@@ -398,7 +398,7 @@ class PlayVideoFromVimeoPrivateVideo extends StatefulWidget {
 
 class _PlayVideoFromVimeoPrivateVideoState 
     extends State<PlayVideoFromVimeoPrivateVideo> {
-  late final PodPlayerController controller;
+  final PodPlayerController controller;
 
   @override
   void initState() {

@@ -2,14 +2,14 @@ import 'package:pod_player/pod_player.dart';
 import 'package:flutter/material.dart';
 
 class PlayVideoFromAsset extends StatefulWidget {
-  const PlayVideoFromAsset({Key? key}) : super(key: key);
+  const PlayVideoFromAsset({Key key}) : super(key: key);
 
   @override
   State<PlayVideoFromAsset> createState() => _PlayVideoFromAssetState();
 }
 
 class _PlayVideoFromAssetState extends State<PlayVideoFromAsset> {
-  late final PodPlayerController controller;
+  PodPlayerController controller;
   @override
   void initState() {
     controller = PodPlayerController(
